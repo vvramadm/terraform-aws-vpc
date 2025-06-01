@@ -75,26 +75,26 @@ resource "aws_subnet" "database" {
 }
 
 
-resource "aws_eip" "nat" {
-  domain   = "vpc"
-}
+#resource "aws_eip" "nat" {
+#  domain   = "vpc"
+#}
 
-resource "aws_nat_gateway" "example" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public[0].id
+#resource "aws_nat_gateway" "example" {
+ # allocation_id = aws_eip.nat.id
+ # subnet_id     = aws_subnet.public[0].id
 
-  tags = merge(
-    var.common_tags,
-    var.nat_gateway_tags,
-    {
-      Name = local.resource_name
-    }
-  )
+ # tags = merge(
+  #  var.common_tags,
+ #   var.nat_gateway_tags,
+ #   {
+ #     Name = local.resource_name
+  #  }
+#  )
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.main]
-}
+#  depends_on = [aws_internet_gateway.main]
+#}
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
