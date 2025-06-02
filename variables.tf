@@ -1,89 +1,82 @@
+
 variable "project_name"{
 
+   
+    default= {}
 }
 
-variable "environment"{
-
-}
-
-variable "vpc_cidr" {
-
+variable "environment" {
+  
+  default = {}
 }
 
 variable "enable_dns_hostnames" {
-    default = true
+  default = true
 }
 
-# mandatoryt
-variable "common_tags"{
-    type = map
-    #default = {}
+variable "vpc_cidr" {
+  default = "10.0.0.0/16"
+}
+variable "common_tags" {
+  default = {}
 }
 
-variable "vpc_tags" {
-    default = {}
+variable "tags" {
+   default = {}
 }
 
-variable "igw_tags" {
-    default = {}
-}
+ variable "igw_tags" {
+ default = {}
+} 
 
 variable "public_subnet_cidrs" {
-    type = list
-    validation {
-        condition     = length(var.public_subnet_cidrs) == 2
-        error_message = "Please provide 2 valid public subnet CIDR"
-    }
-}
-
-variable "public_subnet_tags" {
-    default = {}
+  type = list
+  validation {
+    condition = length(var.public_subnet_cidrs)==3
+    error_message = "please provide 3 valid subnet cidr"
+  }
 }
 
 variable "private_subnet_cidrs" {
-    type = list
-    validation {
-        condition     = length(var.private_subnet_cidrs) == 2
-        error_message = "Please provide 2 valid private subnet CIDR"
-    }
-}
-
-variable "private_subnet_tags" {
-    default = {}
+  type = list
+  validation {
+    condition = length(var.private_subnet_cidrs)==3
+    error_message = "please provide 3 valid subnet cidr"
+  }
 }
 
 variable "database_subnet_cidrs" {
-    type = list
-    validation {
-        condition     = length(var.database_subnet_cidrs) == 2
-        error_message = "Please provide 2 valid database subnet CIDR"
-    }
+  type = list
+  validation {
+    condition = length(var.database_subnet_cidrs )==3
+    error_message = "please provide 3 valid subnet cidr"
+  }
 }
 
-variable "database_subnet_tags" {
-    default = {}
-}
+variable "db_subnet_group_tags" {
 
-variable "nat_gateway_tags" {
-    default = {}
-}
+ default =  {}
+ }
 
-variable "public_route_table_tags" {
-    default = {}
+
+
+ variable "public_route_table_tags" {
+   default = {}
 }
 
 variable "private_route_table_tags" {
-    default = {}
-}
-
+  default = {}
+ }
 variable "database_route_table_tags" {
-    default = {}
-}
+ default = {}
+ }
 
 variable "is_peering_required" {
-    default = false
+  type = bool
+   default = false
 }
 
-variable "vpc_peering_tags" {
-    default = {}
-}
+ variable "vpc_peering_tags" {
+   default = {}
+  
+ }
