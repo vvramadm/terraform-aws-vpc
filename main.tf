@@ -17,7 +17,7 @@ resource "aws_internet_gateway" "main" {
   var.common_tags,
    var.tags,
    {
-     Name=local.resource_name
+     Name = local.resource_name
    }
 
    )
@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "main" {
           var.common_tags,
           var.tags,
           {
-              Name="${local.resource_name}-public-${local.az_zones[count.index]}"
+              Name = "${local.resource_name}-public-${local.az_zones[count.index]}"
           }
       )
      
@@ -50,7 +50,7 @@ resource "aws_internet_gateway" "main" {
           var.common_tags,
           var.tags,
           {
-              Name="${local.resource_name}-private-${local.az_zones[count.index]}"
+              Name = "${local.resource_name}-private-${local.az_zones[count.index]}"
           }
       )
   }
@@ -65,7 +65,7 @@ resource "aws_internet_gateway" "main" {
           var.common_tags,
           var.tags,
           {
-              Name="${local.resource_name}-database-${local.az_zones[count.index]}"
+              Name = "${local.resource_name}-database-${local.az_zones[count.index]}"
           }
       )
 
@@ -80,7 +80,7 @@ resource "aws_internet_gateway" "main" {
           var.common_tags,
           var.db_subnet_group_tags,
           {
-              Name=local.resource_name
+              Name = local.resource_name
           }
       ) 
   }
@@ -97,7 +97,7 @@ resource "aws_internet_gateway" "main" {
 #      var.common_tags,
 #      var.tags,
 #      {
-#          Name=local.resource_name
+#          Name = local.resource_name
 #      }
 #    )
 
@@ -112,7 +112,7 @@ resource "aws_internet_gateway" "main" {
       var.common_tags,
       var.public_route_table_tags,
       {
-          Name="${local.resource_name}-public"
+          Name = "${local.resource_name}-public"
       }
     )
   }
@@ -123,7 +123,7 @@ resource "aws_internet_gateway" "main" {
       var.common_tags,
       var.private_route_table_tags,
       {
-          Name="${local.resource_name}-private"
+          Name = "${local.resource_name}-private"
       }
     )
   }
@@ -134,7 +134,7 @@ resource "aws_internet_gateway" "main" {
       var.common_tags,
       var.database_route_table_tags,
       {
-          Name="${local.resource_name}-database"
+          Name = "${local.resource_name}-database"
       }
     )
   }
@@ -182,7 +182,7 @@ resource "aws_internet_gateway" "main" {
         var.common_tags,
         var.vpc_peering_tags,
         {
-            Name="${local.resource_name}-default"
+            Name = "${local.resource_name}-default"
         }
     )
     }
@@ -202,7 +202,7 @@ resource "aws_internet_gateway" "main" {
      resource "aws_route" "database_peering" {
          count = var.is_peering_required?1:0
          route_table_id = aws_route_table.database.id
-         destination_cidr_block =data.aws_vpc.default.cidr_block
+         destination_cidr_block = data.aws_vpc.default.cidr_block
          vpc_peering_connection_id = aws_vpc_peering_connection.peering[count.index].id
 
      }
